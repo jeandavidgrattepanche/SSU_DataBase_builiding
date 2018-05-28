@@ -12,5 +12,11 @@ Required: Vsearch
 
 The scripts require the software packages to be added to your path.
 
+constraintTree.py allows to create a constraint tree to use in RaxML. In this purpose, the sequence names are coded such as:
+
+Al_ci_in_sp_Strombidium_rassoulzadegani_AY257125 : Alveolata; Ciliophora; Intramacronucleata; Spirotrichea; and the species name and GenBank accession number
+Am_My_My_Didymium_nigripes_AF239230: Amoebozoa; Mycetozoa; Myxogastria; and the species name and GenBank accession number
+The script uses this code to constraint for outgroup.
+
 mask_gaps.py allows to remove column with missing character at x %. 
 Required: BioPython and aligned sequences file.
