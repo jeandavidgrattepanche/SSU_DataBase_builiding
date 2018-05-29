@@ -18,7 +18,7 @@ Al_ci_in_sp_Strombidium_rassoulzadegani_AY257125 : Alveolata; Ciliophora; Intram
 Am_My_My_Didymium_nigripes_AF239230: Amoebozoa; Mycetozoa; Myxogastria; and the species name and GenBank accession number
 The script uses this code to constraint for outgroup and generates a file named constrainttree.txt
 
-pick_sequences_name.py allows to pick subset of sequences based on their name (e.g. $ python pick_sequences_name.py inputsequencefile Al_ci_in_sp)
+pick_sequences_name.py allows to pick subset of sequences based on their name (e.g. $ python pick_sequences_name.py inputsequencefile Al_ci_in_sp) or a list of names (e.g. $ python pick_sequences_name.py inputsequencefile Al_ci_in_sp;Al_di;Am_)
 
 mask_gaps.py allows to remove column with missing character at x % from an alignment. 
 Required: BioPython and aligned sequences file. I use MAFFT to do my alignments ($ MAFFT inputsequencefile > outputalignedsequencefile.fas)
