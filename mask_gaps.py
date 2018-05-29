@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 #from Bio import Entrez
 #Entrez.email = 'jgrattepanche@smith.edu'
 import string
@@ -19,17 +20,17 @@ def maskalignment(arg, percent,filetype):
 	numGap = numRows - int(x)
 	numCol = alignment.get_alignment_length()
 
-	print "Total number of rows: %i" % numRows
-	print "Number of gapped sequences allowed at a given site: %i" % numGap
-	print "Total number of columns: %i" % numCol
+	print("Total number of rows: %i" % numRows)
+	print("Number of gapped sequences allowed at a given site: %i" % numGap)
+	print("Total number of columns: %i" % numCol)
 	my_array = {}
 	colToKeep=[]
 	for i in range(numCol):
-		#print i
+		#print (i)
 		lineName = "line_" + str(i)
 		my_array[lineName] = alignment[:,i]
 		if my_array[lineName].count('-') > numGap:
-			print "get rid of column %i" % i
+			print ("get rid of column %i" % i)
 		else:
 			colToKeep.append(i)
 	
@@ -42,7 +43,7 @@ def maskalignment(arg, percent,filetype):
 		trimAlign.append(newRecord)
 		outFile.write('>' + record.id + '\n' + newseq + '\n')
 		
-	print "Total number of columns remaining: %i" % trimAlign.get_alignment_length()
+	print("Total number of columns remaining: %i" % trimAlign.get_alignment_length())
 
 
 
@@ -53,12 +54,12 @@ def writelog(input):
 
 
 def main():
-	print "*************************************************************************************************"
-	print "This script will take an alignment and return an alignment with the gapped columns removed." 
-	print "Useage is 'python mask_gaps.py <inputAlignment>'"
-	print "*************************************************************************************************\n\n"
+	print ("*************************************************************************************************")
+	print ("This script will take an alignment and return an alignment with the gapped columns removed." )
+	print ("Useage is 'python mask_gaps.py <inputAlignment>'")
+	print ("*************************************************************************************************\n\n")
 	
-	y = raw_input('What type of file is this? (fasta, nexus, phyllip) ')
+	y = input('What type of file is this? (fasta, nexus, phyllip) ')
 	if y[0] == 'n':
 		filetype = 'nexus'
 	elif y[0] == 'f':
@@ -66,15 +67,15 @@ def main():
 	elif y[0] == 'p':
 		filetype = 'phylip'
 	else:
-		print 'that is not a valid file type.  try again'
+		print('that is not a valid file type.  try again')
 		main()
 	
-	print 'At what percent do you want to mask? (i.e. at 75% a column will be removed if fewer than 3/4 the sequences have a character at that position) '
-	x = raw_input('Hit enter for the default of 75%) ')
+	print ('At what percent do you want to mask? (i.e. at 75% a column will be removed if fewer than 3/4 the sequences have a character at that position) ')
+	x = input('Hit enter for the default of 75%) ')
 	try:
 		num = float(x) + 1
 	except TypeError:
-		print 'Your input must be a number.  Try again. '
+		print ('Your input must be a number.  Try again. ')
 		main()
 	except ValueError:
 		x = ""
