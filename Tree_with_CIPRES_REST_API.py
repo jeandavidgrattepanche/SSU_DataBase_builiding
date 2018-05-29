@@ -24,6 +24,11 @@ def main():
 # without bootstrap
 			print('curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fd -F input.infile_=@./' +file+' -F vparam.runtime_=48 -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F vparam.parsimony_seed_val_=12345 -F vparam.outsuffix_=' + file.split('.')[0] + '_outrax.tree -F metadata.statusEmail=true > temp.xml')
 			os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+" -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fd -F input.infile_=@./" +file+" -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F vparam.parsimony_seed_val_=12345 -F vparam.outsuffix_=" + file.split('.')[0] + "_outrax.tree -F metadata.statusEmail=true > temp.xml") 
+# with OTU and reference tree
+#			refTree = 'referenceTree.tre'
+#			print('curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fv -F input.infile_=@./' +file+' -F vparam.runtime_=48 -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.treetop_=@./'+refTree+' -F vparam.outsuffix_=' + file.split('.')[0] + '_outrax.tree -F metadata.statusEmail=true > temp.xml')
+#			os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+" -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fv -F input.infile_=@./" +file+" -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.treetop_=@./"+refTree+" -F vparam.outsuffix_=" + file.split('.')[0] + "_outrax.tree -F metadata.statusEmail=true > temp.xml") 
+
 	
 			subxml = xml.etree.ElementTree.parse('temp.xml').getroot()
 			for field in subxml.iter('title'):
