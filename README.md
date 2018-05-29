@@ -19,6 +19,8 @@ Am_My_My_Didymium_nigripes_AF239230: Amoebozoa; Mycetozoa; Myxogastria; and the 
 The script uses this code to constraint for outgroup.
 This script generates a file named constrainttree.txt
 
+pick_sequences_name.py allows to pick subset of sequences based on their name (e.g. $ python pick_sequences_name.py inputsequencefile Al_ci_in_sp)
+
 mask_gaps.py allows to remove column with missing character at x % from an alignment. 
 Required: BioPython and aligned sequences file. I use MAFFT to do my alignments ($ MAFFT inputsequencefile > outputalignedsequencefile.fas)
 to run the script: $ python mask_gaps.py outputalignedsequencefile.fas x%
