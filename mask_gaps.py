@@ -11,8 +11,8 @@ from Bio import Align
 from Bio.Align import MultipleSeqAlignment
 
 def maskalignment(arg, percent,filetype):
-	maskFileName = arg + '_masked_' + str(percent) + '.fas'
-	outFile = open(maskFileName,'a')
+	masktxt = open(arg.split('.f')[0] + '_masked_' + str(percent) + '.txt','w+')
+	outFile = open(arg.split('.f')[0] + '_masked_' + str(percent) + '.fas','w+')
 	alignment = AlignIO.read(arg, filetype)
 	trimAlign = MultipleSeqAlignment([])
 	numRows = len(alignment)
@@ -31,6 +31,7 @@ def maskalignment(arg, percent,filetype):
 		my_array[lineName] = alignment[:,i]
 		if my_array[lineName].count('-') > numGap:
 			print ("get rid of column %i" % i)
+			masktxt.write(str(i)+'\n')
 		else:
 			colToKeep.append(i)
 	
