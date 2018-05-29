@@ -16,18 +16,17 @@ constraintTree.py allows to create a constraint tree to use in RaxML. In this pu
 
 Al_ci_in_sp_Strombidium_rassoulzadegani_AY257125 : Alveolata; Ciliophora; Intramacronucleata; Spirotrichea; and the species name and GenBank accession number
 Am_My_My_Didymium_nigripes_AF239230: Amoebozoa; Mycetozoa; Myxogastria; and the species name and GenBank accession number
-The script uses this code to constraint for outgroup.
-This script generates a file named constrainttree.txt
+The script uses this code to constraint for outgroup and generates a file named constrainttree.txt
 
 pick_sequences_name.py allows to pick subset of sequences based on their name (e.g. $ python pick_sequences_name.py inputsequencefile Al_ci_in_sp)
 
 mask_gaps.py allows to remove column with missing character at x % from an alignment. 
 Required: BioPython and aligned sequences file. I use MAFFT to do my alignments ($ MAFFT inputsequencefile > outputalignedsequencefile.fas)
-to run the script: $ python mask_gaps.py outputalignedsequencefile.fas x%
-generate a file named: outputalignedsequencefile_maskedx.fas
+To run the script, type in terminal: '$ python3 mask_gaps.py outputalignedsequencefile.fas' then Follow the prompts
+The script generates a file named: outputalignedsequencefile_maskedx.fas
 
 
-These database can be use within the MiSeq pipeline (see other repository). For this, you need to create a folder with:
+These database can be use within the MiSeq pipeline (see Amplicon_MiSeq_pipeline repository). For this, you need to create a folder with:
 - the sequence file before alignment (inputsequencefile)
 - the alignment outputalignedsequencefile.fas
 - the masked alignment outputalignedsequencefile_maskedx.fas
