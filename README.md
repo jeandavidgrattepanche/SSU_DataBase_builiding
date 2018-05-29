@@ -32,9 +32,11 @@ Tree building
 	$ export PASSWORD = you password on CIPRES
 	$ export KEY= you key generater on CIPRES
 	see https://www.phylo.org/restusers/documentation.action for more informations
-	$ curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fv -F input.infile_=@./outputs/outgroup_removal/OTUseq_nosingleton_nochimeras_nocont_BLASTed_TA_masked.fas -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.treetop_=@./SAR_db/SSU_SAR_EUK_v14.3_RAxML_constraint_rooted.tre -F metadata.statusEmail=true
+	$ curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fd -F input.infile_=@./"outputalignedsequencefile_maskedx.fas" -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F vparam.parsimony_seed_val_=12345 -F metadata.statusEmail=true
 
-The scrip CIPRES_REST_API.py do it for you. type $  and follow the prompts
+The script Tree_with_CIPRES_REST_API.py do it for you. type $  python3 Tree_with_CIPRES_REST_API.py and follow the prompts
+
+
 
 These database can be use within the MiSeq pipeline (see Amplicon_MiSeq_pipeline repository). For this, you need to create a folder with:
 - the sequence file before alignment (inputsequencefile)
