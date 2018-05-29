@@ -25,6 +25,16 @@ Required: BioPython and aligned sequences file. I use MAFFT to do my alignments 
 To run the script, type in terminal: '$ python3 mask_gaps.py outputalignedsequencefile.fas' then Follow the prompts
 The script generates a file named: outputalignedsequencefile_maskedx.fas
 
+Tree building
+	b- This tree can also be run through CIPRES REST API (CRA) with this commandline: 
+	$ export URL=https://cipresrest.sdsc.edu/cipresrest/v1
+	$ export CRA_USER = your username on CIPRES
+	$ export PASSWORD = you password on CIPRES
+	$ export KEY= you key generater on CIPRES
+	see https://www.phylo.org/restusers/documentation.action for more informations
+	$ curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fv -F input.infile_=@./outputs/outgroup_removal/OTUseq_nosingleton_nochimeras_nocont_BLASTed_TA_masked.fas -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.treetop_=@./SAR_db/SSU_SAR_EUK_v14.3_RAxML_constraint_rooted.tre -F metadata.statusEmail=true
+
+The scrip CIPRES_REST_API.py do it for you. type $  and follow the prompts
 
 These database can be use within the MiSeq pipeline (see Amplicon_MiSeq_pipeline repository). For this, you need to create a folder with:
 - the sequence file before alignment (inputsequencefile)
