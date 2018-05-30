@@ -75,8 +75,8 @@ def main():
 		print('that is not a valid file type.  try again')
 		main()
 	
-	print('At what percent do you want to mask? (i.e. at 25% a column will be removed if fewer than 1/4 the sequences have a character at that position i.e. 75% of missing data) ')
-	x = input('Hit enter for the default of 25%) ')
+	print('At what percent do you want to mask? (i.e. at 75% a column will be removed if fewer than 1/4 the sequences have a character at that position i.e. 75% of missing data) ')
+	x = input('Hit enter for the default of 75%) ')
 	try:
 		num = float(x) + 1
 	except TypeError:
@@ -87,7 +87,7 @@ def main():
 	if x == "":	
 		percent = 25.0
 	else:
-		percent = float(x)
+		percent = 100.00-float(x)
 
 	for arg in sys.argv[1:]:
 		maskalignment(arg, percent,filetype)
