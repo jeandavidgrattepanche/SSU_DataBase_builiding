@@ -37,7 +37,7 @@ def main():
 					out.write(file+ '\t'+ str(field.text) +'\n')
 					out.close()
 	if search[0] == 'N':
-		search2 = input('dowlaoding a tree? Y or N \n')
+		search2 = input('downlaoding a tree? Y or N \n')
 		if search2[0] == 'Y':
 #get back the tree:
 			listfiles = open('List_of_Submitted_Tree.txt','r')
