@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 #from Bio import Entrez
 #Entrez.email = 'jgrattepanche@smith.edu'
 import string
@@ -11,27 +10,32 @@ from Bio import Align
 from Bio.Align import MultipleSeqAlignment
 
 def maskalignment(arg, percent,filetype):
-	masktxt = open(arg.split('.f')[0] + '_masked_' + str(percent) + '.txt','w+')
-	outFile = open(arg.split('.f')[0] + '_masked_' + str(percent) + '.fas','w+')
+	maskedcolumn =  open(arg.split('.')[0] + '_mask_' + str(percent) + '.txt', 'w+')
+	outFile = open(arg + '_masked_' + str(percent) + '.fas','w+')
+	checkgap = open(arg.split('.')[0] + '_missingcharacter.txt', 'w+')
 	alignment = AlignIO.read(arg, filetype)
 	trimAlign = MultipleSeqAlignment([])
 	numRows = len(alignment)
 	x = float(percent) * float(numRows) / 100.0
-	numGap = numRows - int(x)
+	numGap = numRows - float(x)
 	numCol = alignment.get_alignment_length()
 
 	print("Total number of rows: %i" % numRows)
 	print("Number of gapped sequences allowed at a given site: %i" % numGap)
 	print("Total number of columns: %i" % numCol)
+	checkgap.write("Total number of rows: \t"+ str(numRows) + '\nNumber of gapped sequences allowed at a given site: \t'+ str(numGap) +'\n Total number of columns: \t'+ str(numCol)+ '\n\n cutoff : \t'+ str(x)+ '\n\n\n')
+	checkgap.write("Position \t Missing Characters \t Characters \n")
 	my_array = {}
 	colToKeep=[]
 	for i in range(numCol):
-		#print (i)
+		#print i
 		lineName = "line_" + str(i)
 		my_array[lineName] = alignment[:,i]
+		chapre = int(numRows)-int(my_array[lineName].count('-'))
+		checkgap.write(str(i)+'\t'+ str(my_array[lineName].count('-'))+'\t'+ str(chapre)+'\n')
 		if my_array[lineName].count('-') > numGap:
-			print ("get rid of column %i" % i)
-			masktxt.write(str(i)+'\n')
+			print("get rid of column %i" % i)
+			maskedcolumn.write(str(i) +'\n')
 		else:
 			colToKeep.append(i)
 	
@@ -55,10 +59,10 @@ def writelog(input):
 
 
 def main():
-	print ("*************************************************************************************************")
-	print ("This script will take an alignment and return an alignment with the gapped columns removed." )
-	print ("Useage is 'python mask_gaps.py <inputAlignment>'")
-	print ("*************************************************************************************************\n\n")
+	print("*************************************************************************************************")
+	print("This script will take an alignment and return an alignment with the gapped columns removed." )
+	print("Useage is 'python mask_gaps.py <inputAlignment>'")
+	print("*************************************************************************************************\n\n")
 	
 	y = input('What type of file is this? (fasta, nexus, phyllip) ')
 	if y[0] == 'n':
@@ -71,17 +75,17 @@ def main():
 		print('that is not a valid file type.  try again')
 		main()
 	
-	print ('At what percent do you want to mask? (i.e. at 75% a column will be removed if fewer than 3/4 the sequences have a character at that position) ')
-	x = input('Hit enter for the default of 75%) ')
+	print('At what percent do you want to mask? (i.e. at 25% a column will be removed if fewer than 1/4 the sequences have a character at that position i.e. 75% of missing data) ')
+	x = input('Hit enter for the default of 25%) ')
 	try:
 		num = float(x) + 1
 	except TypeError:
-		print ('Your input must be a number.  Try again. ')
+		print('Your input must be a number.  Try again. ')
 		main()
 	except ValueError:
 		x = ""
 	if x == "":	
-		percent = 75.0
+		percent = 25.0
 	else:
 		percent = float(x)
 
