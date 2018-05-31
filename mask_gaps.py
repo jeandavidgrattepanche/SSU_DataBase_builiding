@@ -9,9 +9,9 @@ from Bio import AlignIO
 from Bio import Align
 from Bio.Align import MultipleSeqAlignment
 
-def maskalignment(arg, percent,filetype):
-	maskedcolumn =  open(arg.split('.')[0] + '_mask_' + str(percent) + '.txt', 'w+')
-	outFile = open(arg + '_masked_' + str(percent) + '.fas','w+')
+def maskalignment(arg, percent, percentmissing,filetype):
+	maskedcolumn =  open(arg.split('.')[0] + '_mask_' + str(percentmissing) + '.txt', 'w+')
+	outFile = open(arg + '_masked_' + str(percentmissing) + '.fas','w+')
 	checkgap = open(arg.split('.')[0] + '_missingcharacter.txt', 'w+')
 	alignment = AlignIO.read(arg, filetype)
 	trimAlign = MultipleSeqAlignment([])
@@ -88,9 +88,9 @@ def main():
 		percent = 25.0
 	else:
 		percent = 100.00-float(x)
-
+		percentmissing= x
 	for arg in sys.argv[1:]:
-		maskalignment(arg, percent,filetype)
+		maskalignment(arg, percent, percentmissing,filetype)
 
 
 main()
