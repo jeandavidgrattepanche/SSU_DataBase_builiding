@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 __author__ = "Jean-David Grattepanche"
 __version__ = "7, May 29, 2018"
@@ -15,7 +15,7 @@ def main():
 	script, seqfile, name = argv
 	IDlist = []; IDdict={}
 	out= open(seqfile.split('.')[0]+'_for_'+name+'.fasta','w+')
-	if count(name.split(';')) > 2:
+	if name.count(';')) > 2:
 		for eachname in name.split(';'):
 			for Seq in SeqIO.parse(seqfile,'fasta'):
 				if Seq.id.startswith(eachname):
