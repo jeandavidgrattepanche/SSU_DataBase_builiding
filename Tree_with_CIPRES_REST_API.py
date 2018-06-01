@@ -47,7 +47,7 @@ def main():
 			for line in listfiles:
 				os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+"/"+line.split('\n')[0].split('\t')[1]+'/output > outputlist.xml')
 		
-			outxml = xml.etree.ElementTree.parse('output.xml').getroot()	
+			outxml = xml.etree.ElementTree.parse('outputlist.xml').getroot()	
 			for results in outxml.iter('jobfile'):
 				for resultname in results.iter('filename'):
 					print(resultname.text)
