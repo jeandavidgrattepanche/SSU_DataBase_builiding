@@ -9,6 +9,7 @@ def main():
 		URL="https://cipresrest.sdsc.edu/cipresrest/v1"
 		CRA_USER="your user name"
 		PASSWORD="your password"
+		KEY = "your Key"
 		search = input('Do you want to build a new tree? Y or N \n')
 	if search[0] == 'Y':
 		search = input('Have you changed the name of the alignment in the script (look at file line 23, replace test_tree_pipeline.fasta by your sequence file)? Y or N \n')
