@@ -57,6 +57,7 @@ def main():
 						for resultcode in results.iter('outputDocumentId'):
 							print(resultcode.text)
 							os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+"/"+line.split('\n')[0].split('\t')[1]+'/output/'+str(resultcode.text)+' > '+str(resultname.text)) 
+			print("When you have done, please remember to delete your file on the CIPRES server. To do it copy the job you want to delete in a file named List_of_Tree_to_be_deleted.txt. Thanks!")
 		if search2[0] == 'N':
 			search3 = input('Deleting old Tree? Y or N \n')
 			if search3[0] == 'Y':
