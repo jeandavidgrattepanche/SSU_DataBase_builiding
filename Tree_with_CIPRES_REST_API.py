@@ -60,9 +60,9 @@ def main():
 		if search2[0] == 'N':
 			search3 = input('Deleting old Tree? Y or N \n')
 			if search3[0] == 'Y':
-			listfiles = open('List_of_Tree_to_be_deleted.txt','r')
-			for line in listfiles:
-				os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" -X DELETE "+URL+"/job/"+CRA_USER+"/"+line.split('\n')[0].split('\t')[1]+' > deleted.xml')
+				listfiles = open('List_of_Tree_to_be_deleted.txt','r')
+				for line in listfiles:
+					os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" -X DELETE "+URL+"/job/"+CRA_USER+"/"+line.split('\n')[0].split('\t')[1]+' > deleted.xml')
 			
 			if search3[0] == 'N':
 				print ('Please answer yes or no. Try again. ')
