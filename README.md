@@ -34,7 +34,7 @@ The script generates a file named: outputalignedsequencefile_maskedx.fas
 	*	see https://www.phylo.org/restusers/documentation.action for more informations
 	*	$ curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fd -F input.infile_=@./"outputalignedsequencefile_maskedx.fas" -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F vparam.parsimony_seed_val_=12345 -F metadata.statusEmail=true
 
-**OBSOLETE** ~~The script Tree_with_CIPRES_REST_API.py do it for you. type $  python3 Tree_with_CIPRES_REST_API.py and follow the prompts
+**OBSOLETE** ~~The script Tree_with_CIPRES_REST_API.py do it for you. type $  python3 Tree_with_CIPRES_REST_API.py and follow the prompts~~
 
 The script *Submit_job_CRA.py* do it for you. type $  python3 Tree_with_CIPRES_REST_API.py and follow the prompts
 
