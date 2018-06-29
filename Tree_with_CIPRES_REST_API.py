@@ -1,3 +1,5 @@
+## OBSOLETE VERSION ##
+
 import os, re, string
 import xml.etree.ElementTree
 
