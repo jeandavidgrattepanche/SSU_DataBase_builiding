@@ -41,7 +41,7 @@ def main():
 					out.write(file+ '\t'+ str(field.text) +'\n')
 					out.close()
 	if search[0] == 'N':
-		search2 = input('downloading a tree? Y or N \n')
+		search2 = input('Do you want to download a tree/ an alignment? Y or N \n')
 		if search2[0] == 'Y':
 #get back the tree:
 			listfiles = open('List_of_Submitted_Tree.txt','r')
@@ -52,14 +52,16 @@ def main():
 			for results in outxml.iter('jobfile'):
 				for resultname in results.iter('filename'):
 					print(resultname.text)
-#					if '.' in resultname.text: # for downloading everything
-					if 'BestTree' in resultname.text:
+# 					if '.txt' in resultname.text: # for downloading everything
+					if 'mafft' in resultname.text: # for downloading mafft alignment
+#					if 'labelledTree' in resultname.text: # for downloading EPA tree 
+					if 'BestTree' in resultname.text: # for downloading tree
 						for resultcode in results.iter('outputDocumentId'):
 							print(resultcode.text)
 							os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+"/"+line.split('\n')[0].split('\t')[1]+'/output/'+str(resultcode.text)+' > '+str(resultname.text)) 
 			print("When you have done, please remember to delete your file on the CIPRES server. To do it copy the job you want to delete in a file named List_of_Tree_to_be_deleted.txt. Thanks!")
 		if search2[0] == 'N':
-			search3 = input('Deleting old Tree? Y or N \n')
+			search3 = input('Do you want to delete old jobs? Y or N \n')
 			if search3[0] == 'Y':
 				listfiles = open('List_of_Tree_to_be_deleted.txt','r')
 				for line in listfiles:
