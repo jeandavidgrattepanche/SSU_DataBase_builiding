@@ -1,3 +1,5 @@
+## This new version allow to submit MAFFT alignment and constraint tree through CRA (CIPRES REST API)
+
 import os, re, string
 import xml.etree.ElementTree
 
