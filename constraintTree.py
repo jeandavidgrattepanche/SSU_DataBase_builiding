@@ -37,5 +37,5 @@ def main():
 				othertaxa = seq.id.replace(';size=','_').replace('/','').replace(':','') #+':0'
 				other.append(othertaxa)
 	outfinaltree = open('constrainttree.tre','w+')
-	outfinaltree.write('('+str(am).replace('[','').replace(']','').replace("'","")+',('+str(other).replace('[','').replace(']','').replace("'","")+'))')
+	outfinaltree.write('('+str(am).replace('[','').replace(']','').replace("'","")+',('+str(other).replace('[','').replace(']','').replace("'","")+'));')
 main()
