@@ -17,12 +17,12 @@ from Bio import SeqIO
 from Bio import Entrez
 Entrez.email = 'jgrattepanche@smith.edu'
 from sys import argv
-from Bio.Blast.Applications import NcbiblastnCommandline
+#from Bio.Blast.Applications import NcbiblastnCommandline
 from Bio.Blast import NCBIXML
 from Bio.Blast import NCBIWWW
 
 
-def blastonline(NGSfile, idmin, Emin):
+def blastonline(NGSfile ):#, idmin, Emin):
 	if not os.path.exists('temp/'):
 		os.makedirs('temp/')
 	if not os.path.exists('BLAST_results/'):
@@ -33,20 +33,24 @@ def blastonline(NGSfile, idmin, Emin):
 	for record in SeqIO.parse(NGSfile,'fasta'): 
 		ID  = record.id
 		fastalist.append(ID)
-		fastadict[ID] = record.seq
-	for j in range(0, len(fastalist), 100):
-		fastalist2 = fastalist[j:j+100]
-		print("Create batch :", j, " - ", j+100, "on", len(fastalist), "for BLASTing against morphospecies online.", len(fastalist2), "sequences per batch" )
+		fastadict[ID] = record.format('fasta')
+	z = 100
+	for j in range(0, len(fastalist), z):
+		tempseq = open("temp/seqsbatch"+str(j)+".fas",'w+')
+		fastalist2 = fastalist[j:j+z]
+		print("Create batch :", j, " - ", j+z, "on", len(fastalist), "for BLASTing against morphospecies online.", str(z), "sequences per batch" )
 		for ID2 in fastalist2:
 			tempseq = open("temp/seqsbatch"+str(j)+".fas",'a')
 			tempseq.write('>' + ID2 + '\n' + str(fastadict[ID2]) + '\n')
 			tempseq.close()
-		entrezQuery = '("eukaryotae"[organism] AND (all [filter] NOT(environmental samples[filter] OR metagenomes[orgn])))'
+		entrezQuery = '"eukaryota" [Organism] AND (all [filter] NOT ("environmental samples"[organism] OR "metagenomes"[orgn]))'
 		fastafile = open("temp/seqsbatch"+str(j)+".fas").read()
+		print(fastadict[fastalist[j]])
 		#for Seq in SeqIO.parse(NGSfile + "_noBlast_result.txt",'fasta'):
 		#	print(Seq.id, " added to the blast online")
 		#	print("Start Blast online")
-		result_handle = NCBIWWW.qblast("blastn", "nr", fastafile, ncbi_gi=False, format_type="XML", entrez_query= entrezQuery, expect = Emin, perc_ident=idmin, hitlist_size=1)
+		result_handle = NCBIWWW.qblast("blastn", "nr", fastafile, entrez_query = entrezQuery  )#, hitlist_size = 1, format_type="XML", expect=Emin, perc_ident=idmin, )
+# 		result_handle = NCBIWWW.qblast("blastn", "nr", fastadict[fastalist[j]], entrez_query = entrezQuery  )#, hitlist_size = 1, format_type="XML", expect=Emin, perc_ident=idmin, )
 		blast_records = NCBIXML.parse(result_handle)
 		for blast_record in blast_records:
 			if blast_record.descriptions:
@@ -152,9 +156,9 @@ def Rename(inputfile):
 			print(OTU, blastrecord[OTU]) 
 			
 def main():
-	script,  NGSfile, idminy, Eminz = argv
-	idmin = float(idminy)
-	Emin = float(Eminz)
-	blastonline(NGSfile,idmin, Emin)
+	script,  NGSfile = argv  #, idminy, Eminz
+# 	idmin = float(idminy)
+# 	Emin = float(Eminz)
+	blastonline(NGSfile) #,idmin, Emin)
 	Rename(NGSfile)
 main()
