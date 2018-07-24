@@ -86,6 +86,7 @@ def main():
 		x = ""
 	if x == "":	
 		percent = 25.0
+		percentmissing = 75.0
 	else:
 		percent = 100.00-float(x)
 		percentmissing= x
