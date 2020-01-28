@@ -4,7 +4,7 @@ import os, re, string
 import xml.etree.ElementTree
 
 def main():
-	search0 = input('Have you changed the name, password and key in the script (look at file lines 10,11 and 12, replace by your codes)? Y or N \n')
+	search0 = input('Have you changed the name, password and key in the script (look at file lines 12, 13 and 14, replace by your codes)? Y or N \n')
 	if search0[0] == 'N':
 		main()
 	if search0[0] == "Y":
@@ -14,12 +14,12 @@ def main():
 		KEY="KEY"
   search = input('Do you want to send a new job? Y or N \n')
 		if search[0] == 'Y':
-			search1 = input('Have you changed the name of the file/alignment in the script (look at file line 20, replace test_tree_pipeline.fasta by your sequence file), and the reference l 30 or 34 if needed ? Y or N \n')
+			search1 = input('Have you changed the name of the file/alignment in the script (look at file line 20, replace test_tree_pipeline.fasta by your sequence file), and the reference l 33, 43 or 47 if needed ? Y or N \n')
 			if search1[0] == 'N':
 				main()
 			if search1[0] == "Y":
 			#start new tree:
-				file = 'Am_ref_28June18_clean1_mafft_masked_90.fas'
+				file = 'test_tree_pipeline.fasta'
 # for protein add '-F vparam.datatype_=protein' and replace '-F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I' by '-F vparam.prot_sub_model_=PROTGAMMA -F vparam.prot_matrix_spec_=LG'
 # see http://www.phylo.org/index.php/rest/raxmlhpc8_rest_xsede.html for more details and https://www.phylo.org/restusers/docs/cipresXml
 # MAFFT auto for quick alignment
@@ -30,7 +30,7 @@ def main():
 # 				print("curl -u CRA_USER:PASSWORD -H cipres-appkey:KEY URL/job/CRA_USER -F metadata.statusEmail=true -F tool=MAFFT_XSEDE -F input.infile_=@./" +file+" -F vparam.accurate_executable_='linsi68' -F vparam.adjust_direction_='1' -F vparam.analysis_type_='accurate' -F vparam.anysymbol_='1' -F vparam.datatype_='dna' -F vparam.dnaMatrix_='200' -F vparam.noScore_='1' -F vparam.opPenaltyGroupToGroup_='1.53' -F vparam.outputOrder_='--reorder' -F vparam.which_mafft_='7394' -F vparam.runtime_='168' -F vparam.more_memory_='1'")
 # 				os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+" -F metadata.statusEmail=true -F tool=MAFFT_XSEDE -F input.infile_=@./" +file+" -F vparam.accurate_executable_='linsi68' -F vparam.adjust_direction_='1' -F vparam.analysis_type_='accurate' -F vparam.anysymbol_='1' -F vparam.datatype_='dna' -F vparam.dnaMatrix_='200' -F vparam.noScore_='1' -F vparam.opPenaltyGroupToGroup_='1.53' -F vparam.outputOrder_='--reorder' -F vparam.which_mafft_='7394' -F vparam.runtime_='168' -F vparam.more_memory_='1' > temp.xml")
 # MAFTT --addfragment
-#  				refalignment = 'Am_ref_28June18_clean1_mafft_masked_90.fas'
+#  				refalignment = 'refalignment.fas'
 # 				print("curl -u CRA_USER:PASSWORD -H cipres-appkey:KEY URL/job/CRA_USER -F metadata.statusEmail=true -F tool=MAFFT_XSEDE -F input.infile_=@./" +file+" -F input.ref_alignment1_=@./" +refalignment+" -F vparam.anysymbol_='1' -F vparam.auto_analysis_='1' -F vparam.noScore_='1' -F vparam.opPenaltyGroupToGroup_='1.53' -F vparam.outputOrder_='--reorder' -F vparam.reorder_add_='1' -F vparam.use_addfrag_='1' -F vparam.use_keeplength_='1' -F vparam.use_mapout_='1' -F vparam.which_mafft_='7394' -F vparam.runtime_='168' -F vparam.more_memory_='1'")
 # 				os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+" -F metadata.statusEmail=true -F tool=MAFFT_XSEDE -F input.infile_=@./" +file+" -F input.ref_alignment1_=@./" +refalignment+" -F vparam.anysymbol_='1' -F vparam.auto_analysis_='1' -F vparam.noScore_='1' -F vparam.opPenaltyGroupToGroup_='1.53' -F vparam.outputOrder_='--reorder' -F vparam.reorder_add_='1' -F vparam.use_addfrag_='1' -F vparam.use_keeplength_='1' -F vparam.use_mapout_='1' -F vparam.which_mafft_='7394' -F vparam.runtime_='168' -F vparam.more_memory_='1' > temp.xml")
 # with 10 bootstraps
@@ -44,7 +44,7 @@ def main():
 # 				print('curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fd -F input.infile_=@./' +file+' -F vparam.runtime_=48 -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.constraint_=@./'+constraintTree+' -F vparam.outsuffix_=' + file.split('.')[0] + '_constT.tree -F metadata.statusEmail=true > temp.xml')
 # 				os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+" -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fd -F input.infile_=@./" +file+" -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.constraint_=@./"+constraintTree+" -F vparam.outsuffix_=" + file.split('.')[0] + "_constT.tree -F metadata.statusEmail=true > temp.xml") 
 # with OTU and reference tree
-# 				refTree = 'RAxML_bestTree.SSU_SAR_only_v14_for_Euk_SAR_Rhi_Fo_Outgroups_mafft_outrax_85.tree'
+# 				refTree = 'ref_bestTree.tree'
 # 				print('curl -u $CRA_USER:$PASSWORD -H cipres-appkey:$KEY $URL/job/$CRA_USER -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fv -F input.infile_=@./' +file+' -F vparam.runtime_=48 -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.treetop_=@./'+refTree+' -F vparam.outsuffix_=' + file.split('.')[0] + '_outrax.tree -F metadata.statusEmail=true > temp.xml')
 # 				os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+" -F tool=RAXMLHPC8_REST_XSEDE -F vparam.select_analysis_=fv -F input.infile_=@./" +file+" -F vparam.runtime_=168 -F vparam.dna_gtrcat_=GTRGAMMA -F vparam.invariable_=I -F input.treetop_=@./"+refTree+" -F vparam.outsuffix_=" + file.split('.')[0] + "_outrax.tree -F metadata.statusEmail=true > temp.xml") 
 
@@ -70,9 +70,9 @@ def main():
 						for resultname in results.iter('filename'):
 							print(resultname.text)
 # 							if '.txt' in resultname.text: # for downloading everything
-							if 'mafft' in resultname.text: # for downloading everything
-# 							if 'bestTree' in resultname.text:
-# 							if 'labelledTree' in resultname.text:
+							if 'mafft' in resultname.text: # for downloading mafft alignment
+# 							if 'bestTree' in resultname.text: # for downloading tree
+# 							if 'labelledTree' in resultname.text: # for downloading EPA tree
 								for resultcode in results.iter('outputDocumentId'):
 									print(resultcode.text)
 									os.system("curl -u "+CRA_USER+":"+PASSWORD+" -H cipres-appkey:"+KEY+" "+URL+"/job/"+CRA_USER+"/"+line.split('\n')[0].split('\t')[1]+'/output/'+str(resultcode.text)+' > '+str(line.split('\n')[0].split('\t')[0]+'_'+resultname.text)) 
