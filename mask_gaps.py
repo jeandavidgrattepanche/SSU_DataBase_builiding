@@ -1,5 +1,6 @@
-#from Bio import Entrez
-#Entrez.email = 'jeandavid.grattepanche@gmail.com'
+
+#!/usr/bin/python3
+
 import string
 import re, sys, os
 from Bio import SeqIO
