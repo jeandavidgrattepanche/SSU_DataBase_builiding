@@ -1,5 +1,5 @@
 #from Bio import Entrez
-#Entrez.email = 'jgrattepanche@smith.edu'
+#Entrez.email = 'jeandavid.grattepanche@gmail.com'
 import string
 import re, sys, os
 from Bio import SeqIO
@@ -61,7 +61,7 @@ def writelog(input):
 def main():
 	print("*************************************************************************************************")
 	print("This script will take an alignment and return an alignment with the gapped columns removed." )
-	print("Useage is 'python mask_gaps.py <inputAlignment>'")
+	print("Usage is 'python mask_gaps.py <inputAlignment>'")
 	print("*************************************************************************************************\n\n")
 	
 	y = input('What type of file is this? (fasta, nexus, phyllip) ')
