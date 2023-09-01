@@ -44,7 +44,7 @@ def sort_cluster(HTSfile,idmin ):
 			else:
 				if os.path.isfile('Cluster/cluster_'+cluster+'.fasta'):
 					input2 = open('Cluster/cluster_'+cluster+'.fasta','a+')
-					input2.write('>'+row.split('\t')[9].split('\n')[0]+'\n'+str(fastadict[row.split('\t')[9].split('\n')[0]]) +'\n')
+					input2.write('>'+row.split('\t')[8]+'\n'+str(fastadict[row.split('\t')[8]]) +'\n')
 					input2.close()
 				else:
 					input2 = open('Cluster/cluster_'+cluster+'.fasta','w+')
