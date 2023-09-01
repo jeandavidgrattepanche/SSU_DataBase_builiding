@@ -42,14 +42,14 @@ def sort_cluster(HTSfile,idmin ):
 			if row.split('\t')[8].split('_')[4] == row.split('\t')[9].split('\n')[0].split('_')[4]:
 				print(cluster, "Idem at ", idmin*100 , " : ", row.split('\t')[8], row.split('\t')[9].split('\n')[0])
 			else:
-				if os.path.is_file('Cluster/cluster_'+cluster+'.fasta'):
+				if os.path.isfile('Cluster/cluster_'+cluster+'.fasta'):
 					input2 = open('Cluster/cluster_'+cluster+'.fasta','a+')
-					input2.write('>'+row.split('\t')[9]+'\n'+str(fastadict[row.split('\t')[9]]) +'\n')
+					input2.write('>'+row.split('\t')[9]+'\n'+str(fastadict[row.split('\t')[9].split('\n')[0]]) +'\n')
 					input2.close()
 				else:
 					input2 = open('Cluster/cluster_'+cluster+'.fasta','w+')
 					input2.write('>'+row.split('\t')[8]+'\n'+str(fastadict[row.split('\t')[8]]) +'\n')	
-					input2.write('>'+row.split('\t')[9]+'\n'+str(fastadict[row.split('\t')[9]]) +'\n')	
+					input2.write('>'+row.split('\t')[9]+'\n'+str(fastadict[row.split('\t')[9].split('\n')[0]]) +'\n')	
 					input2.close()
 	os.system('rm '+ 	HTSfile.split('.fa')[0]+'_sorted.fasta')
 def main():
